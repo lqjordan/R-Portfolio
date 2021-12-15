@@ -1,0 +1,29 @@
+#Part One
+kc_house_data <- read.csv("/Volumes/GoogleDrive/My Drive/Maryville/DSCI 302 (Intro to R)/Week 7/kc_house_data.csv", stringsAsFactors=TRUE)
+View(kc_house_data)
+
+#Part Two
+colnames(kc_house_data)
+lm.price <- lm(price~bedrooms+bathrooms+sqft_living, data = kc_house_data)
+summary(lm.price)
+
+#Part Three
+lm.price2 <- lm(price~(bedrooms+bathrooms+sqft_living)^3, data = kc_house_data)
+summary(lm.price2)
+
+#Part Four
+lm.price3 <- lm(price ~ bedrooms + bathrooms + sqft_living + waterfront + grade, data = kc_house_data )
+summary(lm.price3)
+
+#Part Five
+kc_house_data[, c("id","date","zipcode","lat","long")] <- list(NULL)
+colnames(kc_house_data)
+lm.price4 <- lm(price ~ -1+., data = kc_house_data)
+summary(lm.price4)
+
+#Part Six
+lm.price5 <- lm(price ~ bedrooms + bathrooms + sqft_living + sqft_lot + floors + waterfront + view + condition + grade, data = kc_house_data)
+summary(lm.price5)
+newhouse <- data.frame (bedrooms = 4, bathrooms = 2, sqft_living = 2560, sqft_lot = 7650, floors = 1.5, waterfront = 1, view = 3, condition = 5, grade = 10)
+predict(lm.price5, newdata = newhouse)
+predict(lm.price5, newdata = newhouse, interval = "predict")
