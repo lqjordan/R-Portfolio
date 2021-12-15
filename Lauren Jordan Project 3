@@ -1,0 +1,26 @@
+#Part One
+loan <- read.csv("/Volumes/GoogleDrive/My Drive/Maryville/DSCI 302 (Intro to R)/Week 6/loan.csv", stringsAsFactors=TRUE)
+   View(loan)
+
+#Part Two
+library(ggplot2)
+ggplot(data=loan, aes(x = loan_amnt)) + geom_histogram(aes(y =..density..), colour ="purple",fill = "white")+geom_density(alpha =.2, fill = "green") + geom_vline(aes(xintercept=mean(loan_amnt)), color = "pink", linetype = "dashed", size=1)
+
+#Part Three
+ggplot(data=loan, aes(x = annual_inc, y = loan_amnt))+geom_point()+geom_smooth()
+
+#Part Four
+ggplot(data = loan, aes(x = term, y = ..count..)) + geom_bar(aes(fill = grade))
+
+#Part Five
+ggplot(data = loan, aes(x = grade, y = loan_amnt)) + geom_dotplot (aes (fill = grade),
+                                                                   binaxis = "y",
+                                                                   binwidth = 2,
+                                                                   stackdir = "center")
+
+#Part Six
+boxplot (loan_amnt~term, data = loan, notch = TRUE,
+         col=c("pink"),
+         main = "Loan Amount by Term", xlab = "Term")
+ggsave("/Volumes/GoogleDrive/My Drive/Maryville/DSCI 302 (Intro to R)/Week 6/loanterm.jpg",width=20, height=15, units = "cm")
+
